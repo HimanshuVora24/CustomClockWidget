@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1054110108164",
+    "project_id": "first-programming-assign-e4a5b",
+    "storage_bucket": "first-programming-assign-e4a5b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1054110108164:android:849e91f96629fc9c8a4351",
+        "android_client_info": {
+          "package_name": "com.example.customclockwidget"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAu9hLa7cY1BMjMBzMNAEyxOiyMF3MSiWg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
