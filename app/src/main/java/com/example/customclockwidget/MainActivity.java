@@ -8,19 +8,31 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, View.OnClickListener {
     SeekBar redBar, greenBar, blueBar;
     int red, green, blue;
     SurfaceView colorView;
     SharedPreferences sp;
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() == null) {
+            //https://stackoverflow.com/a/24205399
+            Intent intent = new Intent(MainActivity.this, LoginScreen.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }
         setContentView(R.layout.activity_main);
         sp = getSharedPreferences("Settings", 0);
         red = sp.getInt("Red", 0);
@@ -42,6 +54,15 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
 
         Button saveButton = (Button) findViewById(R.id.saveButton);
         saveButton.setOnClickListener(this);
+        Button logoutButton = (Button) findViewById(R.id.logoutButton);
+        logoutButton.setOnClickListener((view) -> {
+            mAuth.signOut();
+            Log.d("Logout", "Clicked");
+            Intent intent = new Intent(MainActivity.this, LoginScreen.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        });
     }
 
     @Override
